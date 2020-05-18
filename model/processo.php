@@ -29,7 +29,28 @@ class processo
 
 	public function rodar($acao, $processo)
 	{
+		//PAUSAR
 		if(array_key_exists($acao, array("desligar" => 1, "pausar" => 1, "parar" => 1)))
+		{
+			if($this->getTipo($processo)=='service'){
+				echo ("<script language='JavaScript'>
+				window.alert('Olá Gabriel, você pediu para ".$acao." o serviço ".$processo.". O comando para isso é: sudo service ".$processo." stop')
+				window.location.href='../view/app.php';
+				</script>");
+			}
+			if($this->getTipo($processo)=='app'){
+				echo ("<script language='JavaScript'>
+				window.alert('Olá Gabriel, você pediu para ".$acao." a aplicação ".$processo.". O comando para isso é: sudo killall ".$processo."')
+				window.location.href='../view/app.php';
+				</script>");
+			}
+		}
+
+
+
+
+		//REINICIAR
+		if($acao == "reiniciar")
 		{
 			if($this->getTipo($processo)=='service'){
 				echo ("<script language='JavaScript'>
@@ -39,7 +60,7 @@ class processo
 			}
 			if($this->getTipo($processo)=='app'){
 				echo ("<script language='JavaScript'>
-				window.alert('Olá Gabriel, você pediu para ".$acao." a aplicação ".$processo.". O comando para isso é: sudo killall ".$processo."')
+				window.alert('Olá Gabriel, você pediu para ".$acao." a aplicação ".$processo.". O comando para isso é: Aindã não foi criado.)
 				window.location.href='../view/app.php';
 				</script>");
 			}
